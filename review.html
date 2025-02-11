@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Reviews Page</title>
+  <style>
+    /* General Styles */
+    body {
+      background: #e6e6fa;
+      color: #333;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Page Container */
+    .page-container {
+      background: #fdf5e6;
+      padding: 2rem;
+      border: 3px solid #000;
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .page-container h1 {
+      color: #444;
+      font-size: 2rem;
+      text-decoration: underline;
+    }
+
+    /* Swiper Slider Styles */
+    .swiper {
+      width: 100%;
+      height: auto;
+      margin: 1.5rem 0;
+    }
+
+    .swiper-slide {
+      background: #fff;
+      padding: 2rem;
+      border: 2px solid #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      gap: 1rem; /* Adds space between elements */
+    }
+
+    .swiper-slide h3 {
+      margin: 0;
+      color: #333;
+      font-size: 1.5rem;
+    }
+
+    .swiper-slide p {
+      margin: 0;
+      color: #555;
+      max-width: 600px; /* Limits the width of the review text */
+      text-align: center; /* Ensures text is centered */
+    }
+
+    .swiper-slide img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #444;
+    }
+
+    /* Button */
+    .button {
+      border: 2px solid #000;
+      font-size: 1rem;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      background-color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #444;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    /* Navigation Buttons */
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #000;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+</head>
+<body>
+  <div class="page-container">
+    <h1>Student Reviews</h1>
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="/images/pic1.jpg" alt="Himanshu Yadav">
+          <h3>Himanshu Yadav</h3>
+          <p>"Hacksprint was an unforgettable experience! The energy, the challenges, and the opportunity to collaborate with such talented minds were incredible. It pushed me to think outside the box and code under pressure, which was both thrilling and rewarding."</p>
+        </div>
+        <div class="swiper-slide">
+          <img src="/images/pic2.jpg" alt="Ashwin Kumar Yadav">
+          <h3>Ashwin Kumar Yadav</h3>
+          <p>"I had an amazing time at Hacksprint! The event was well-organized, and the challenges were just the right mix of difficulty and creativity. The workshops and mentorship sessions were super helpful."</p>
+        </div>
+        <div class="swiper-slide">
+          <img src="/images/pic3.jpg" alt="Riddhima Gangwar">
+          <h3>Riddhima Gangwar</h3>
+          <p>"Hacksprint was one of the best experiences of my college life! The thrill of coding under pressure, the excitement of presenting our project, and the chance to network with industry experts made it unforgettable."</p>
+        </div>
+        <div class="swiper-slide">
+          <img src="/images/pic4.jpg" alt="Tisa Biswal">
+          <h3>Tisa Biswal</h3>
+          <p>"Hacksprint was an incredible journey! The challenges were tough but super engaging, and I loved how the event encouraged creativity and innovation. My team and I worked tirelessly."</p>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="button-container">
+      <button class="button" onclick="window.location.href='index.html';">Go Back to Registration</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      loop: true,
+      slidesPerView: 1, // Show only one slide at a time
+      spaceBetween: 20, // Add space between slides
+    });
+  </script>
+</body>
+</html>

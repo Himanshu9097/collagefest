@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Timeline</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Timeline Container */
+    .timeline-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Timeline Header */
+    .timeline-header {
+      text-align: center;
+      font-size: 2rem;
+      color: #444;
+      margin-bottom: 2rem;
+    }
+
+    /* Event Card */
+    .event-card {
+      background-color: #f9f9f9;
+      padding: 1.5rem;
+      border-left: 5px solid #00ccff;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .event-card h3 {
+      font-size: 1.5rem;
+      color: #00ccff;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-card p {
+      font-size: 1rem;
+      color: #555;
+      margin: 0.5rem 0;
+    }
+
+    .event-card p strong {
+      color: #333;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .timeline-container {
+        padding: 1rem;
+      }
+
+      .event-card {
+        padding: 1rem;
+      }
+
+      .event-card h3 {
+        font-size: 1.3rem;
+      }
+
+      .event-card p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="timeline-container">
+    <h1 class="timeline-header">Event Timeline</h1>
+    <div id="events-container">
+      <!-- Events will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <script>
+    // Fetch timeline events from the backend
+    async function fetchTimelineEvents() {
+      try {
+        const response = await fetch('http://localhost:3000/timeline');
+        const events = await response.json();
+        const eventsContainer = document.getElementById('events-container');
+        eventsContainer.innerHTML = ''; // Clear existing content
+
+        // Check if there are no events
+        if (events.length === 0) {
+          eventsContainer.innerHTML = '<p>No events found.</p>';
+          return;
+        }
+
+        // Loop through events and create event cards
+        events.forEach(event => {
+          const eventCard = document.createElement('div');
+          eventCard.className = 'event-card';
+          eventCard.innerHTML = `
+            <h3>${event.name}</h3>
+            <p><strong>Date:</strong> ${event.date}</p>
+            <p><strong>Time:</strong> ${event.time}</p>
+            <p><strong>Location:</strong> ${event.location}</p>
+            <p>${event.description}</p>
+          `;
+          eventsContainer.appendChild(eventCard);
+        });
+      } catch (error) {
+        console.error('Error fetching timeline events:', error);
+        const eventsContainer = document.getElementById('events-container');
+        eventsContainer.innerHTML = '<p>Failed to load events. Please try again later.</p>';
+      }
+    }
+
+    // Call the function to fetch and display timeline events
+    fetchTimelineEvents();
+  </script>
+</body>
+</html>

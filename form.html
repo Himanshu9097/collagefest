@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Registration Form - Retro Style</title>
+  <style>
+    /* General Styles */
+    body {
+      background: linear-gradient(90deg, #ffccff, #99ccff);
+      color: #000;
+      font-family: 'Verdana', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    /* Form Container */
+    .form-container {
+      background: #ffffff;
+      padding: 2rem;
+      border: 3px solid #999;
+      border-radius: 10px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      margin: 5vh auto;
+      text-align: left;
+    }
+
+    .form-container h2 {
+      background-color: #00ccff;
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      border: 2px solid #000;
+      margin-bottom: 2rem;
+    }
+
+    /* Input Box */
+    .inputBox {
+      margin-bottom: 1rem;
+    }
+
+    .inputBox label {
+      display: block;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .inputBox input,
+    .inputBox select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #0099ff;
+      border-radius: 3px;
+      background: #f5f5f5;
+      font-size: 1rem;
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Buttons */
+    .button {
+      border: 2px solid #000;
+      font-size: 1rem;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(90deg, #ff9900, #ff6600);
+      border-radius: 5px;
+      cursor: pointer;
+      text-shadow: 1px 1px #333;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: linear-gradient(90deg, #ffcc00, #ff9933);
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+    /* Navigation Buttons Alignment */
+    .button-container button {
+      flex: 1;
+      margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Team Registration Form</h2>
+    <form id="teamRegistrationForm" action="https://formspree.io/f/xjkgevrv" method="POST">
+      <!-- Step 1 -->
+      <div class="form-step" id="step1">
+        <div class="inputBox">
+          <label for="leaderName">Team Leader Name</label>
+          <input type="text" id="leaderName" name="leaderName" required>
+        </div>
+        <div class="inputBox">
+          <label for="leaderRegNumber">Leader Registration Number</label>
+          <input type="text" id="leaderRegNumber" name="leaderRegNumber" required>
+        </div>
+        <div class="inputBox">
+          <label for="teamName">Team Name</label>
+          <input type="text" id="teamName" name="teamName" required>
+        </div>
+        <div class="inputBox">
+          <label for="teamSize">Team Size</label>
+          <input type="number" id="teamSize" name="teamSize" required>
+        </div>
+        <div class="button-container">
+          <button type="button" class="button" onclick="nextStep(2)">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="form-step" id="step2" style="display: none;">
+        <div class="inputBox">
+          <label for="member1Name">Member 1 Name</label>
+          <input type="text" id="member1Name" name="member1Name" required>
+        </div>
+        <div class="inputBox">
+          <label for="member1RegNumber">Member 1 Registration Number</label>
+          <input type="text" id="member1RegNumber" name="member1RegNumber" required>
+        </div>
+        <div class="inputBox">
+          <label for="member1Phone">Member 1 Phone Number</label>
+          <input type="tel" id="member1Phone" name="member1Phone" required>
+        </div>
+        <div class="inputBox">
+          <label for="member1Email">Member 1 Email</label>
+          <input type="email" id="member1Email" name="member1Email" required>
+        </div>
+        <div class="inputBox">
+          <label for="member1Residency">Member 1 Residency Type</label>
+          <select id="member1Residency" name="member1Residency" required>
+            <option value="dayScholar">Day Scholar</option>
+            <option value="hosteler">Hosteler</option>
+          </select>
+        </div>
+        <div class="button-container">
+          <button type="button" class="button" onclick="prevStep(1)">Previous</button>
+          <button type="button" class="button" onclick="nextStep(3)">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="form-step" id="step3" style="display: none;">
+        <div class="inputBox">
+          <label for="member2Name">Member 2 Name</label>
+          <input type="text" id="member2Name" name="member2Name" required>
+        </div>
+        <div class="inputBox">
+          <label for="member2RegNumber">Member 2 Registration Number</label>
+          <input type="text" id="member2RegNumber" name="member2RegNumber" required>
+        </div>
+        <div class="inputBox">
+          <label for="member2Phone">Member 2 Phone Number</label>
+          <input type="tel" id="member2Phone" name="member2Phone" required>
+        </div>
+        <div class="inputBox">
+          <label for="member2Email">Member 2 Email</label>
+          <input type="email" id="member2Email" name="member2Email" required>
+        </div>
+        <div class="inputBox">
+          <label for="member2Residency">Member 2 Residency Type</label>
+          <select id="member2Residency" name="member2Residency" required>
+            <option value="dayScholar">Day Scholar</option>
+            <option value="hosteler">Hosteler</option>
+          </select>
+        </div>
+        <div class="button-container">
+          <button type="button" class="button" onclick="prevStep(2)">Previous</button>
+          <button type="button" class="button" onclick="nextStep(4)">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="form-step" id="step4" style="display: none;">
+        <div class="inputBox">
+          <label for="member3Name">Member 3 Name</label>
+          <input type="text" id="member3Name" name="member3Name" required>
+        </div>
+        <div class="inputBox">
+          <label for="member3RegNumber">Member 3 Registration Number</label>
+          <input type="text" id="member3RegNumber" name="member3RegNumber" required>
+        </div>
+        <div class="inputBox">
+          <label for="member3Phone">Member 3 Phone Number</label>
+          <input type="tel" id="member3Phone" name="member3Phone" required>
+        </div>
+        <div class="inputBox">
+          <label for="member3Email">Member 3 Email</label>
+          <input type="email" id="member3Email" name="member3Email" required>
+        </div>
+        <div class="inputBox">
+          <label for="member3Residency">Member 3 Residency Type</label>
+          <select id="member3Residency" name="member3Residency" required>
+            <option value="dayScholar">Day Scholar</option>
+            <option value="hosteler">Hosteler</option>
+          </select>
+        </div>
+        <div class="button-container">
+          <button type="button" class="button" onclick="prevStep(3)">Previous</button>
+          <button type="submit" class="button">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function nextStep(step) {
+      document.querySelectorAll('.form-step').forEach((stepElement) => {
+        stepElement.style.display = 'none';
+      });
+      document.getElementById(`step${step}`).style.display = 'block';
+    }
+
+    function prevStep(step) {
+      document.querySelectorAll('.form-step').forEach((stepElement) => {
+        stepElement.style.display = 'none';
+      });
+      document.getElementById(`step${step}`).style.display = 'block';
+    }
+  </script>
+</body>
+</html>

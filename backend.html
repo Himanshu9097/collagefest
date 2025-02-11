@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Management</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Form Container */
+    .form-container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    /* Input Fields */
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    /* Buttons */
+    button {
+      background-color: #00ccff;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0099cc;
+    }
+
+    /* Update Form */
+    .update-form {
+      margin-top: 2rem;
+      border-top: 2px solid #eee;
+      padding-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Create Event</h1>
+    <form id="createEventForm">
+      <input type="text" id="name" placeholder="Event Name" required>
+      <input type="date" id="date" required>
+      <input type="time" id="time" required>
+      <textarea id="description" placeholder="Event Description" required></textarea>
+      <input type="text" id="location" placeholder="Event Location" required>
+      <button type="submit">Create Event</button>
+    </form>
+  </div>
+
+  <div class="form-container update-form">
+    <h1>Update Event</h1>
+    <form id="updateEventForm">
+      <input type="text" id="eventId" placeholder="Event ID" required>
+      <input type="date" id="updateDate" required>
+      <input type="time" id="updateTime" required>
+      <button type="submit">Update Event</button>
+    </form>
+  </div>
+
+  <script>
+    // Create Event
+    document.getElementById('createEventForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const description = document.getElementById('description').value;
+      const location = document.getElementById('location').value;
+
+      const response = await fetch('http://localhost:3000/events', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, date, time, description, location }),
+      });
+
+      const result = await response.json();
+      console.log('Event Created:', result);
+
+      // Clear the form after submission
+      document.getElementById('createEventForm').reset();
+    });
+
+    // Update Event
+    document.getElementById('updateEventForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const eventId = document.getElementById('eventId').value;
+      const date = document.getElementById('updateDate').value;
+      const time = document.getElementById('updateTime').value;
+
+      const response = await fetch(`http://localhost:3000/events/${eventId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ date, time }),
+      });
+
+      const result = await response.json();
+      console.log('Event Updated:', result);
+
+      // Clear the form after submission
+      document.getElementById('updateEventForm').reset();
+    });
+  </script>
+</body>
+</html>
